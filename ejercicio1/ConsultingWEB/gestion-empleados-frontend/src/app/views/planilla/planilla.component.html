@@ -1,0 +1,20 @@
+
+  <button style="margin-bottom: 30px; " class="btn btn-warning" (click)="volverARutaAnterior()">Volver</button>
+  <div class="contenedor centrado">
+  <div class="tabla-container">
+    <table id="tablaEmpleado">
+      <tr *ngFor="let prop of empleadoElegido | keyvalue">
+        <th>{{ prop.key }}</th>
+        <td>{{ prop.value }}</td>
+      </tr>
+    </table>
+  </div>
+  <div class="tabla-container">
+    <table id="tablaEmpleadoDetalle">
+      <tr *ngFor="let prop2 of empleadoElegidoDetalle | keyvalue">
+        <th>{{ prop2.key }}</th>
+        <td>{{ prop2.value }}</td>
+      </tr>
+    </table>
+  </div>
+</div>

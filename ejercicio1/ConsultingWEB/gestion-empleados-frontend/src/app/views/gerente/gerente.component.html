@@ -1,0 +1,26 @@
+
+	<table class="table table-striped table-hover">
+		<thead style="background-color:rgb(14, 74, 147); text-align: center;">
+			<tr style="color:white; font-weight: 50; font-family:Arial, Helvetica, sans-serif">
+				<th>ID</th>
+				<th>Nombre</th>
+				<th>Email</th>
+				<th>Banda</th>
+				<th>Sub-banda</th>
+				<th>Salario mensual</th>
+				<th>PMR</th>
+
+		</thead>
+
+		<tbody>
+			<tr (click)="onRowClick(g.id)" *ngFor="let g of this.gerenciados" style="text-align: center" class="clickable">
+				<td>{{g.id}}</td>
+				<td>{{g.nombreCompleto}}</td>
+				<td>{{g.email}}</td>
+				<td>{{g.banda}}</td>
+				<td>{{g.subBanda}}</td>
+				<td>{{g.salario}}</td>
+				<td>{{g.pmr}}</td>
+			</tr>
+		</tbody>
+	</table>	

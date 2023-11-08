@@ -1,0 +1,31 @@
+export interface EmpleadoInterfaz {
+   worker: string;
+   employeeID: number;
+   homeTalentID: number;
+   homeEmployeeType: string;
+   activeStatus: string;
+   separationDate: Date;
+   lastDayOfWork: Date;
+   currentCompensationGrade: string;
+   effectiveDateofCurrentCompensationGrade: Date;
+   previousCompensationGrade: string;
+   effectiveDateofPreviousCompensationGrade: Date;
+   compensationGradeProfile: string;
+   jobProfile: string;
+   jobFamily: string;
+   fte: number;
+   compaRatio: number;
+   lengthOfService: string;
+   businessProcess: string;
+   effectiveDate: Date;
+   businessProcessReason: string;
+   annualReferenceSalary: number;
+   monthlyReferenceSalary: number;
+   actualSalary: number;
+   numberOfSalaryMonths: number;
+   currency: string;
+   payRateType: string;
+   ytdCommissions: number;
+   incentivePlan: string;
+   incentiveRole: string;
+}

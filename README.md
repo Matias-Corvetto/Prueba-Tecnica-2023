@@ -12,17 +12,120 @@ Se agrega un README donde se documentará todo el proceso de construcción de pr
 <br>
 
 ## Ejercicio 1
+
+
+### Especificaciones
+
+Para este proyecto se utilizaron las siguientes herramientas:
+
+* *Visual Studio Code*, junto con extensiones correspondientes ("Pack for Java", "Spring Initializr", entre otras)
+* *Spring Boot* - 3.1.5 (Maven)
+* *Java* - 17.0
+* *npm* - 10.2.3
+* *NodeJs* - 18.17.0
+* *Angular* - 16.2.9
+* *TypeScript* - 4.9.3
+* *MySQL* - 8.0
+
+
 ### Inicialización de Spring Boot
-Como editor de código fue utilizado *Apache NetBeans*. Se inicializron las clases necesarias para la utilización de *Spring Boot* (versión 3.1.5) desde la página *https://start.spring.io/*, usando Maven. Por último, se utilizó Java 17.
 
 * **Group ID**: com.pruebatecnica
 * **Artifact ID**: ejercicio1
 
+### Base de Datos
+
+El sistema de gestión de base de datos elegido fue MySql. Para el manejo de datos se cuenta con un usuario "pruebatecnica" con contraseña de igual nombre, en el cual se crea una base de datos, llamada de la misma forma, "pruebatecnica". Mediante desarrollo en Java, las tablas Empleado y DetalleEmpleado son creadas, ambas con el campo "id de empleado" como clave primaria (primary key) y clave foránea (foreign key) al mismo tiempo.
+
 <br>
 
+### Estructura de ConsultingAPI
 
+**Clases de Java**
 
-* npm  10.2.3
-* node js 18.17.0
-* angular 16.2.9
-* typescript 4.9.3
+<hr>
+
+**Tool**: En esta carpeta se desarrolló especificamente una clase llama *ExcelReader*, la cual se encarga de leer los datos del archivo y almacenarlo en su tabla correspondiente en la base de datos mediante un "INSERT". Su funcionamiento es simplemente iterar en cada una de las columnas para cada una de las filas, categorizar cada tipo de dato y guardarlo en una declaración para que al final se guarden los datos. Para crear la función se tuvieron en cuenta algunos detalles específicos de los archivos, como en que columna se encontraba el ID (Utilizado simplemente como método de verificación de completitud).
+
+**Entity**: Esta carpeta cuenta con 4 clases: Empleado y DetalleEmpleado, mediante las cuales se hace la conexión entre SQL y Java (clave primaria, nombres, tipos de dato, largo, etc). Y además, Chart y Gerenciado, clases usadas para obtener los datos específicos para las consultas necesarias en la WEB, ya que al mismo tiempo ayuda a mantener el orden de los datos.
+
+**Repository**: En esta carpeta se encuentran los repositorios o DAO (Data of Access) de las tablas Empleado y DetalleEmpleado. En estas clases se declaran las consultas SQL necesarias según las instrucciones.
+
+**Service**: Aquí se instancian las funciones necesarias para obtener lo requerido según cada función. Consta de 4 clases: una de interface y otra de implementación, para ambas tablas existentes.
+
+**Web**: Esta carpeta contiene la clase del controlador REST, el cual se encarga de enviar la información sustraída de la base de datos mediante el protocolo HTTP, de donde se leerán los datos para manejarlos en la WEB.
+
+**Aplicación**: También se encuentra la clase principal (main), encargada de habilitar que toda la aplicación en su parte Backend funcione.
+
+<br>
+
+**Clases Estáticas**
+
+<hr>
+
+**Data**: En esta clase se encuentran ambos archivos Excel de los cuales se leen los datos existentes.
+
+<br>
+
+### Estructura de ConsultingWEB
+
+**Model**: Aquí se encuentran las clases existentes, las cuales se instancian para obtener la información necesaria. Corresponden a las mismas clases mencionadas en el Backend, y a partir de sus atributos se expone la información de manera gráfica.
+
+**Service**: En esta carpeta se encuentran los scripts para poder consultar la base de datos, para empleados, detalles de empleado y gráficas. Su funcionalidad es listar todo lo obtenido luego del envío de datos HTTP, y hacer público el uso de estas listas para manejos específicos.
+
+**Interface**: En esta carpeta se encuentran las interfaces de las 2 clases de tabla, estas son utilizadas para poder mostrar toda la información de la tabla de manera automatizada.
+
+**Views**: Por último, aquí se encuentran las vistas gráficas de la WEB. Se subdividen según componenete, los cuales son: 
+1. **Inicio** - pantalla inicial, donde se elige el usuario a consultar.
+2. **Gerente** - pantalla del gerente, la cual muestra datos de sus gerenciados.
+3. **Director** - pantalla del director, que muestra datos de todos los empleados.
+4. **Planilla** - pantalla donde se muestran absolutamente todos los datos existentes las 2 tablas de un empleado específico. 
+5. **Grafico** - componente que muestra ciertos datos especificados en forma de gráfico de barras, para la vista del director.
+
+<br>
+
+### Decisiones Realizadas y Observaciones
+
+* Muchos campos de la tablas de Excel estaban vacíos, entre ellos el salario mensual (uno de los indicados para usar en la consulta WEB). Este dato por ejemplo, muestra su campo aunque este vacío, pero si alguien ingresara un dato, consecuentemente se vería en la tabla luego de actualizar.
+
+* Muchas columnas no estaban especificadas en su tipo, estas fueron simplemente registradas como String.
+
+* Una de las tablas tiene lo que parece ser una celda vacía final, lo cual hacía que el lector de archivo fallara. Para solucionar esto, simplemente se creo un if que verifica si ya estan todas las columnas en esa tabla registradas (simplemente leyendo el numero de columnas e comparando forzosamente a ese numero en cierta etapa), y si están, el programa no sigue leyendo.
+
+* Ya que el gerente tiene una manera de ingresar, me pareció acorde hacer un tipo de verificación también para el director. Teniendo en cuenta lo que ese puesto significa, se pide un usuario y contraseña, los cuales son simplemente evaluados al campo para verificar. Hay 2 formas de acceder:
+	* usuario: director
+	* contraseña: director
+
+	la otra:
+	
+	* usuario: 694651
+	* contraseña: 694651
+
+	Este último como curiosidad, debido a que ese es el identificador de gerente de todos los gerentes.
+
+* El conflicto más importante a tener en cuenta, es que la información en ambas tablas (empleado y detalles de empleado) no son coherente y no son compatibles. La  información de un identificador de empleado es distinta a la misma en su otra tabla, esto hace que los valores en un "JOIN" no sean ciertos en totalidad. Sin embargo, ante ese error de compatibilidad, se decidió ignorar este detalle y trabajar como si el empleado fuera el mismo. Esto hará que, por ejemplo, al momento de ver una planilla de un empleado en la WEB, los datos en ambas tablas se vean notoriamente distintos. Por esto mismo es importante hacer esta aclaración.
+
+<br>
+
+### Ejecución del Proyecto
+Para una ejecución óptima se recomienda contar con las mismas especificaciones mencionadas al inicio para no encontrarse con ningún inconveniente.
+
+* **Gestor de Base de Datos**: Deberá instalarse un gestor para manejar las consultas y tablas. La opción recomendada es MySQL, en su versión 8 (ante  cualquier diferencia en la opción de gestor o ingreso, deberá especificarse en application.properties y en la clase ExcelReader). Luego de contar con la instalación, deberá crearse un usuario cliente para conectarse, este deberá ser idéntico al usado:
+	* usuario: **pruebatecnica**
+	* contraseña: **pruebatecnica**
+
+	Posteriormente, deberemos crear una base de datos también llamada **pruebatecnica**.
+
+* **Ejecución de Backend**: Para ejecutar el Backend, deberá simplemente ejecutarse la clase main, llamada *Ejercicio1Application*, encontrada en la ConsultingAPI.
+
+	**ruta**: *ejercicio1/ConsultingAPI/src/main/java/com/pruebatecnica*
+
+* **Ejecución de Frontend**: Para ejecutar el Frontend, se deberá ejecutar el comando *ng s -o* en la directiva correspondiente a la carpeta *gestion-empleado-frontend*, encontrada en la ConsultingWEB.
+
+	**ruta**: *ejercicio1/ConsultingWEB/gestion-empleados-frontend*
+
+Deberá chequearse que ninguna de las 2 finalice mientras la página este utilizándose, o quedará fuera de serivicio.
+
+Finalmente, el URL para visitar la página, será local en el puerto 4200 para Frontend. En el puerto 8080 del servidor local, se encontrarán las consultas HTTP.
+
+### **URL**: http://localhost:4200/inicio

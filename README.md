@@ -41,11 +41,11 @@ El sistema de gestión de base de datos elegido fue MySql. Para el manejo de dat
 
 ### Estructura de ConsultingAPI
 
-**Clases de Java**
+**Java**
 
 <hr>
 
-**Tool**: En esta carpeta se desarrolló especificamente una clase llama *ExcelReader*, la cual se encarga de leer los datos del archivo y almacenarlo en su tabla correspondiente en la base de datos mediante un "INSERT". Su funcionamiento es simplemente iterar en cada una de las columnas para cada una de las filas, categorizar cada tipo de dato y guardarlo en una declaración para que al final se guarden los datos. Para crear la función se tuvieron en cuenta algunos detalles específicos de los archivos, como en que columna se encontraba el ID (Utilizado simplemente como método de verificación de completitud).
+**Tool**: En esta carpeta se desarrolló específicamente una clase llama *ExcelReader*, la cual se encarga de leer los datos del archivo y almacenarlo en su tabla correspondiente en la base de datos mediante un "INSERT". Su funcionamiento es simplemente iterar en cada una de las columnas para cada una de las filas, categorizar cada tipo de dato y guardarlo en una declaración para que al final se guarden los datos. Para crear la función se tuvieron en cuenta algunos detalles específicos de los archivos, como en que columna se encontraba el ID (Utilizado simplemente como método de verificación de completitud).
 
 **Entity**: Esta carpeta cuenta con 4 clases: Empleado y DetalleEmpleado, mediante las cuales se hace la conexión entre SQL y Java (clave primaria, nombres, tipos de dato, largo, etc). Y además, Chart y Gerenciado, clases usadas para obtener los datos específicos para las consultas necesarias en la WEB, ya que al mismo tiempo ayuda a mantener el orden de los datos.
 
@@ -59,11 +59,11 @@ El sistema de gestión de base de datos elegido fue MySql. Para el manejo de dat
 
 <br>
 
-**Clases Estáticas**
+**Recursos**
 
 <hr>
 
-**Data**: En esta clase se encuentran ambos archivos Excel de los cuales se leen los datos existentes.
+**Data**: En esta carpeta se encuentran ambos archivos Excel de los cuales se leen los datos existentes.
 
 <br>
 
@@ -75,7 +75,7 @@ El sistema de gestión de base de datos elegido fue MySql. Para el manejo de dat
 
 **Interface**: En esta carpeta se encuentran las interfaces de las 2 clases de tabla, estas son utilizadas para poder mostrar toda la información de la tabla de manera automatizada.
 
-**Views**: Por último, aquí se encuentran las vistas gráficas de la WEB. Se subdividen según componenete, los cuales son: 
+**Views**: Por último, aquí se encuentran las vistas gráficas de la WEB. Se subdividen según componente, los cuales son: 
 1. **Inicio** - pantalla inicial, donde se elige el usuario a consultar.
 2. **Gerente** - pantalla del gerente, la cual muestra datos de sus gerenciados.
 3. **Director** - pantalla del director, que muestra datos de todos los empleados.
@@ -90,7 +90,9 @@ El sistema de gestión de base de datos elegido fue MySql. Para el manejo de dat
 
 * Muchas columnas no estaban especificadas en su tipo, estas fueron simplemente registradas como String.
 
-* Una de las tablas tiene lo que parece ser una celda vacía final, lo cual hacía que el lector de archivo fallara. Para solucionar esto, simplemente se creo un if que verifica si ya estan todas las columnas en esa tabla registradas (simplemente leyendo el numero de columnas e comparando forzosamente a ese numero en cierta etapa), y si están, el programa no sigue leyendo.
+* Una de las tablas tiene lo que parece ser una celda vacía final, lo cual hacía que el lector de archivo fallara. Para solucionar esto, simplemente se creo un if que verifica si ya están todas las columnas en esa tabla registradas (simplemente leyendo el numero de columnas e comparando forzosamente a ese numero en cierta etapa), y si están, el programa no sigue leyendo.
+
+* Se decidió que los datos se carguen una única vez al principio del todo, cuando las tablas están vacías. En el lector de Excel se evalúa si ya existen datos en la tabla, si existen, no va ingresar nuevos porque omitirá el proceso. Esto se decidió así debido a que según lo indicado en la letra, no hay necesidad de actualización, y al mismo tiempo ayuda a prevenir errores. Si quisiera cambiarse para que los datos se muestre en tiempo actual, simplemente debería cambarse ese detalle y hacer que la tabla se borre y cargue cada vez que se inicia la aplicación.
 
 * Ya que el gerente tiene una manera de ingresar, me pareció acorde hacer un tipo de verificación también para el director. Teniendo en cuenta lo que ese puesto significa, se pide un usuario y contraseña, los cuales son simplemente evaluados al campo para verificar. Hay 2 formas de acceder:
 	* usuario: director
@@ -124,8 +126,68 @@ Para una ejecución óptima se recomienda contar con las mismas especificaciones
 
 	**ruta**: *ejercicio1/ConsultingWEB/gestion-empleados-frontend*
 
-Deberá chequearse que ninguna de las 2 finalice mientras la página este utilizándose, o quedará fuera de serivicio.
+Deberá chequearse que ninguna de las 2 finalice mientras la página este utilizándose, o quedará fuera de servicio.
 
 Finalmente, el URL para visitar la página, será local en el puerto 4200 para Frontend. En el puerto 8080 del servidor local, se encontrarán las consultas HTTP.
 
 ### **URL**: http://localhost:4200/inicio
+
+<br>
+
+## Ejercicio 2
+La respuesta a este ejercicio es una tabla donde se muestran los casos de prueba funcionales y no funcionales (Se encuentra en la carpeta ejercicio2).
+
+Para plantear las prioridades y los casos de prueba no funcionales, se adoptó el rol real de lo que sería una empresa. Es decir, importa el funcionamiento a grande escalabilidad, importa lo que los usuarios experimenten al usar la página, la privacidad es importante (sobre todo para los cargos más significativos como el director), etc.
+
+<br>
+
+## Ejercicio 3
+Para responder este ejercicio, se creó una clase de Java, teniendo en cuenta el uso este mismo junto a JPA en el desarrollo del proyecto. En esta clase se encuentra tanto la consulta SQL mediante Springboot, como la consigna SQL en su lenguaje nativo (se encuentra comentado al final).
+
+
+	SELECT * FROM Ciudadanos WHERE (Nombre LIKE 'Ped%' OR Nombre LIKE 'San%') AND LENGTH(Apellido) < 15;
+
+Si se quisiera que al momento de obtener los datos, la evaluación sea sensible a mayúsculas y minúsculas, la consulta sería la siguiente:
+
+	SELECT * FROM Ciudadanos WHERE (BINARY Nombre LIKE 'Ped%' OR BINARY Nombre LIKE 'San%') AND LENGTH(Apellido) < 15;
+
+<br>
+
+## Ejercicio 4
+De manera similar al ejercicio anterior, este ejercicio también está representada en una clase de Java por las mismas razones. Este ejercicio puede tener más de una iterpretación, siendo así que la interpretación que parece ser más lógica es la siguiente:
+
+	SELECT c.nombre FROM Ciudadanos c WHERE NOT EXISTS (
+		SELECT 1
+   	FROM Ciudadanos c2
+   	WHERE c.nombre = c2.nombre AND c.id != c2.id
+	)
+	ORDER BY c.nombre ASC;
+
+*"Seleccionar todos los nombres que sean únicos (que no se repitan)"*
+
+Para hacerlo sensible a mayúsculas y minúsculas:
+
+	SELECT c.nombre FROM Ciudadanos c WHERE NOT EXISTS (
+	SELECT 1
+   	FROM Ciudadanos c2
+   	WHERE BINARY c.nombre = BINARY c2.nombre AND c.id != c2.id
+	)
+	ORDER BY c.nombre ASC;
+
+<br>
+
+Otras interpretaciones posibles:
+
+	1. SELECT Distinct nombre FROM Ciudadanos
+
+*"Seleccionar todos los nombres de manera que se muestre cada uno existente una única vez"*
+
+	2. SELECT nombre FROM Ciudadanos
+
+*"Seleccionar todos los nombres únicos (interpretando nombre único como la descripción para la columna. Ej: Mi nombre único es matías)"*
+
+Si bien se brindan opciones alternas, cabe aclarar que la respuesta final es la primera opción.
+
+<br>
+
+## Ejercicio 5

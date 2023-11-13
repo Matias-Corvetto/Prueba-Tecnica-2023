@@ -191,3 +191,15 @@ Si bien se brindan opciones alternas, cabe aclarar que la respuesta final es la 
 <br>
 
 ## Ejercicio 5
+Sobre este ejercicio, las imágenes en Docker fueron construidas, sin embargo, no se logró hacer funcionar completamente a la hora de ejecutar los contenedores. 
+
+A pesar de eso, se deja en la carpeta "*ejercicio5*" los Dockerfile y el Compose para visualizar lo realizado.
+
+<br>
+
+## Ejercicio 6
+La web fue reconstruida satisfactoriamente, contando con apenas algunos pequeños detalles de diferencia.
+
+Se decidió, por su aparente aspecto, representar como botones a las opciones que aparecían a la derecha de la pantalla.
+
+Para ejecutar esta interfaz de la manera más óptima, se recomienda seguir las especificaciones mencionadas para el ejercicio 1.

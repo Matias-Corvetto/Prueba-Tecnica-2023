@@ -1,0 +1,31 @@
+version: '3'
+
+services:
+  consulting-api:
+    build:
+      context: ./ConsultingAPI
+    ports:
+      - "8080:8080"
+    depends_on:
+      - consulting-mysql
+    environment:
+      - javax.persistence.jdbc.url=jdbc:mysql://consulting-mysql:3307/pruebatecnica
+      - hibernate.dialect=org.hibernate.dialect.MySQL8Dialect
+
+  consulting-web:
+    build:
+      context: ./ConsultingWEB
+    ports:
+      - "4200:4200"
+    depends_on:
+      - consulting-api
+
+  consulting-mysql:
+    build:
+      context: ./consultingSQL
+    ports:
+      - "3307:3306"
+    environment:
+      MYSQL_DATABASE: pruebatecnica
+      MYSQL_USER: pruebatecnica
+      MYSQL_PASSWORD: pruebatecnica

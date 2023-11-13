@@ -1,43 +1,164 @@
 <header>
-	<!-- <nav class="container-fluid " style="background-color: #023f75; height: 125px;"	>
-    <a><img src="./assets/logo-bps.png" alt="Texto alternativo" height="50px" width="128"></a>
-  <span style="text-align: center" class="align-middle">
-    <h3>Bienvenidos al</h3>
-    <h1>MENÚ DE ATYR</h1>
-  </span>
-</nav> -->
-	<nav class="justify-content-middle row" style="background-color: #023f75;">
-		<div class="col-13">
-			<div class="text-center ">
-				<h3>Bienvenidos al</h3>
-				<h1>MENÚ DE ATYR</h1>
-			</div>
-			<div lass="col-3">
-				<a><img src="./assets/logo-bps.png" alt="Logo" height="30" class="mr-3"></a>
-			</div>
-		</div>
+	<nav class="container-fluid d-flex align-items-center" style="background-color: #023f75; height: 125px;">
+		<a class="imagen-nav"><img src="./assets/logo-bps.png" alt="Logo BPS" height="48px"></a>
+		<span class="titulo-nav">
+			<h3>Bienvenidos al</h3>
+			<h1>MENÚ DE ATYR</h1>
+		</span>
 	</nav>
-
-
 </header>
 
 
+<body>
+	<div class="wrapper">
+		<div class="sidebar">
+			<div class="sidebar-top">
 
-<main role="main" style="padding-bottom: 0;">
+				<div class="usuario">
+					<div class="circle">
+						<img src="./assets/usuario.png" alt="Usuario">
+					</div>
+					<div class="name">
+						<h2>JUAN PEREZ</h2>
+						<p>Ult. acceso mm/dd/aaaa</p>
+					</div>
+				</div>
 
-	<section class="jumbotron text-center">
+				<div class="buscador">
+					<img src="./assets/lupa.png" alt="Lupa" id="buscador-icon" height="30px">
+					<input type="text" id="buscador-input" placeholder="Buscar...">
+				</div>
 
-		<div class="container">
+			</div>
 
+			<hr>
+
+			<div>
+				<ul class="menu">
+					<li><a href="#registros">REGISTROS</a></li>
+					<li><a href="#recaudacion">RECAUDACIÓN</a></li>
+					<li><a href="#gestion">GESTIÓN DE COBRO</a></li>
+					<li><a href="#aplicativos">APLICATIVOS GENERALES</a></li>
+					<li><a href="#consultas">CONSULTAS</a></li>
+					<li><a href="#documentacion">DOCUMENTACIÓN</a></li>
+					<li><a href="#distribucion">DISTRIBUCIÓN</a></li>
+					<li><a href="#portal">PORTAL DE DATOS EXTERNOS</a></li>
+				</ul>
+			</div>
 		</div>
-	</section>
 
-	<div class="album py-5 bg-light" style="min-height: 400px; margin-bottom: 5%">
-		<div class="container">
+		<div class="content">
+			<div class="ultimos-accedidos">
+				<h2>LOS ÚLTIMOS ACCEDIDOS</h2>
+				<div class="content-buttons">
+					<button class="custom-button">
+						<div class="boton-cont">
+							<h4>Alta de personas <a><img src="./assets/reloj.png" alt="Reloj" height="15px"></a> </h4>
+							<span class="boton-sub">Empresas > Alta de personas</span>
+							<span class="boton-izq">dd/mm/hhhh HH:MM</span>
+						</div>
+					</button>
+
+					<button class="custom-button">
+						<div class="boton-cont">
+							<h4>Lorem ipsum dolor sit <a><img src="./assets/reloj.png" alt="Reloj" height="15px"></a> </h4>
+							<span class="boton-sub">Lorem ipsum dolor sit amet > consectur ....</span>
+							<span class="boton-izq">dd/mm/hhhh HH:MM</span>
+						</div>
+					</button>
+
+					<button class="custom-button">
+						<div class="boton-cont">
+							<h4>Lorem ipsum dolor sit <a><img src="./assets/reloj.png" alt="Reloj" height="15px"></a> </h4>
+							<span class="boton-sub">Lorem ipsum dolor sit amet > consectur ....</span>
+							<span class="boton-izq">dd/mm/hhhh HH:MM</span>
+						</div>
+					</button>
+
+					<button class="custom-button">
+						<div class="boton-cont">
+							<h4>Lorem ipsum dolor sit <a><img src="./assets/reloj.png" alt="Reloj" height="15px"></a> </h4>
+							<span class="boton-sub">Lorem ipsum dolor sit amet > consectur ....</span>
+							<span class="boton-izq">dd/mm/hhhh HH:MM</span>
+						</div>
+					</button>
+				</div>
+			</div>
+
+			<div class="mas-accedidos" style="margin-top: 20px;">
+				<h2>LOS MÁS ACCEDIDOS</h2>
+				<div class="content-buttons">
+					<button class="custom-button">
+						<div class="boton-cont">
+							<h4>Consulta representantes <a><img src="./assets/marcador.png" alt="Marcador" height="15px"></a> </h4>
+							<span class="boton-sub">Representantes > Consulta representantes</span>
+						</div>
+					</button>
+
+					<button class="custom-button">
+						<div class="boton-cont">
+							<h4>Actividades <a><img src="./assets/marcador.png" alt="Marcador" height="15px"></a> </h4>
+							<span class="boton-sub">Empresas > Actividades</span>
+						</div>
+					</button>
+
+					<button class="custom-button">
+						<div class="boton-cont">
+							<h4>Contribuyentes vinculados <a><img src="./assets/marcador.png" alt="Marcador" height="15px"></a> </h4>
+							<span class="boton-sub">Empresas > C ontribuyentes vinculados</span>
+						</div>
+					</button>
+
+					<button class="custom-button">
+						<div class="boton-cont">
+							<h4>Datos contribuyentes y empresas <a><img src="./assets/marcador.png" alt="Marcador" height="15px"></a>
+							</h4>
+							<span class="boton-sub">Empresas > Datos contribuyentes y ...</span>
+						</div>
+					</button>
+				</div>
+			</div>
+
+			<div class="favoritos" style="margin-top: 20px; margin-bottom: 40px;">
+				<h2>MIS FAVORITOS</h2>
+				<div class="content-buttons">
+					<button class="custom-button">
+						<div class="boton-cont">
+							<h4>Consulta representantes <a><img src="./assets/estrella.png" alt="Estrella" height="20px"></a> </h4>
+							<span class="boton-sub">Representantes > Consulta representantes</span>
+							<a class="boton-izq-2">Quitar</a>
+						</div>
+					</button>
+
+					<button class="custom-button">
+						<div class="boton-cont">
+							<h4>Clave y número de contribuyente <a><img src="./assets/estrella.png" alt="Estrella" height="20px"></a> </h4>
+							<span class="boton-sub">Representantes > Consulta representantes</span>
+							<a class="boton-izq-2">Quitar</a>
+						</div>
+					</button>
+
+					<button class="custom-button">
+						<div class="boton-cont">
+							<h4>Lorem ipsum dolor sit <a><img src="./assets/estrella.png" alt="Estrella" height="20px"></a> </h4>
+							<span class="boton-sub">Lorem ipsum dolor sit amet > consectur ....</span>
+							<a class="boton-izq-2">Quitar</a>
+						</div>
+					</button>
+
+					<button class="custom-button">
+						<div class="boton-cont">
+							<h4>Lorem ipsum dolor sit <a><img src="./assets/estrella.png" alt="Estrella" height="20px"></a> </h4>
+							<span class="boton-sub">Lorem ipsum dolor sit amet > consectur ....</span>
+							<a class="boton-izq-2">Quitar</a>
+						</div>
+					</button>
+				</div>
+			</div>
+
 		</div>
 	</div>
 
-</main>
+</body>
 
-<footer class="text-muted bg-dark" style="height: 6%;">
-</footer>
+<footer></footer>

@@ -5,7 +5,7 @@
 <br>
 
 ## Introducción
-Fue creada una organización personal para poder crear un repositorio con más opciones para brindar acceso. Posteriormente se le fue dado acceso de *Maintainer* al usuario **svergara1987**.
+Fue creada una organización personal para poder crear un repositorio con más opciones para brindar acceso. Posteriormente se le fue dado acceso de *Maintainer* al usuario evaluador.
 
 Se agrega un README donde se documentará todo el proceso de construcción de programas junto con su método de ejecución.
 
@@ -16,7 +16,7 @@ Se agrega un README donde se documentará todo el proceso de construcción de pr
 
 ### Especificaciones
 
-Para este proyecto se utilizaron las siguientes herramientas:
+Para este proyecto se utilizaron las siguientes herramientas y tecnologías:
 
 * *Visual Studio Code*, junto con extensiones correspondientes ("Pack for Java", "Spring Initializr", entre otras)
 * *Spring Boot* - 3.1.5 (Maven)
